@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ébano · Ribera del Duero</title>
+
+  <!-- Fuentes de Google -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+    /* Aquí están todos los colores, fuentes y espaciados */
+    :root {
+      --color-bg-light:    #f5f4ef;
+      --color-text-dark:   #1c1c1c;
+      --color-text-light:  #ffffff;
+      --color-accent:      #1a3a2a;
+      --color-accent-hover:#2d5a3d;
+      --color-divider:     #3a6648;
+
+      --font-logo:   'Playfair Display', Georgia, serif;
+      --font-script: 'Dancing Script', cursive;
+      --font-body:   'Lora', Georgia, serif;
+
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+
+      --transition: 0.3s ease;
+    }
+
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg-light);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+/*==CONTENEDOR PRINCIPAL==*/
+    .page-wrapper {
+      display: flex;
+      flex-direction: column; /* mobile: apilado */
+      min-height: 100svh;
+      position: relative;     /* ancla para la botella */
+      overflow: hidden;
+    }
+
+    /*==HERO: sección izquierda==*/
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 45vh;
+      padding: var(--space-sm);
+
+      /* Foto del viñedo como fondo */
+      background-image: url('bg-image.jpeg');
+      background-size: cover;
+      background-position: center 30%;
+
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    /* Capa oscura encima de la foto */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:rgba(22, 35, 36, 0.7)
+      ;
+    }
+
+    /* El texto por encima de la capa oscura */
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-sm) var(--space-sm) var(--space-sm);
+      text-align: center;
+      align-items: center;
+    }
+
+    /* Título ÉBANO */
+    .hero__logo {
+      font-family: var(--font-logo);
+      font-weight: 900;
+      font-size: clamp(4rem, 15vw, 6rem);
+      color: var(--color-text-light);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    /* Tagline en cursiva */
+    .hero__tagline {
+      font-family: var(--font-script);
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--color-text-light);
+      margin-top: 0.4rem;
+      opacity: 0.9;
+    }
+    /*==BOTELLA==*/
+    .bottle-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+      z-index: 10;
+      margin-top: -240px;
+      padding: var(--space-sm)var(--space-sm)var(--space-md);
+    }
+
+    .bottle-container img {
+      /* clamp: nunca menor de 120px ni mayor de 200px */
+      width: clamp(100px, 38vw, 160px);
+
+      /* sombra que sigue la silueta del PNG */
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.35));
+      transform: rotate(0deg);
+    }
+    /* ==SECCIÓN DERECHA: texto== */
+    .content {
+      background-color: var(--color-bg-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-sm) var(--space-sm) var(--space-lg);
+      gap: var(--space-sm);
+      
+    }
+
+    /* Línea decorativa vertical */
+    .content__divider {
+      width: 2px;
+      height: 50px;
+      background-color: var(--color-divider);
+      opacity: 0.6;
+    }
+
+    /* Párrafo en cursiva */
+    .content__text {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.8;
+      color: var(--color-text-dark);
+      max-width: 480px;
+      padding: var(--space-sm) var(--space-md) var(--space-sm);
+    }
+
+    /* La palabra "Excelente" en verde */
+    .content__text strong {
+      font-style: italic;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    /* ==BOTÓN CTA== */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+
+      background-color: var(--color-accent);
+      color: var(--color-text-light);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      padding: 1em 2.2em;
+      border-radius: 50px;
+      cursor: pointer;
+
+      /* qué propiedades van a animarse en el hover */
+      transition:
+        background-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+    }
+
+    /* Hover: el botón se levanta */
+    .btn-cta:hover {
+      background-color: var(--color-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,58,42,0.35);
+    }
+
+    /* Click: el botón baja de golpe */
+    .btn-cta:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+    /* ==ANIMACIONES DE ENTRADA== */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Aplicamos el keyframe a cada elemento con delay distinto */
+    /* Cuanto mayor el delay, más tarde aparece → efecto escalonado */
+    .hero__logo {
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+
+    .hero__tagline {
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .bottle-container {
+      animation: fadeUp 1s ease 0.5s both;
+    }
+
+    .content__text {
+      animation: fadeUp 0.9s ease 0.7s both;
+    }
+
+    .btn-cta {
+      animation: fadeUp 0.9s ease 0.9s both;
+    }
+
+    /* Respeto a usuarios que prefieren sin animaciones */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+     /* Ocultar segunda línea en mobile */
+    .content__divider:last-of-type {
+      display: none;
+    
+    }
+/* Solo mobile */
+    @media (max-width: 767px) {
+      .hero__logo {
+        margin-top: -8rem;
+      }
+    }
+    /* == DESKTOP: 768px o más ==
+       Todo lo de arriba era mobile.
+       Aquí solo cambiamos lo que
+       es diferente en desktop.
+       ======================== */
+    @media (min-width: 768px) {
+
+      /* Dos columnas lado a lado */
+      .page-wrapper {
+        flex-direction: row;
+        min-height: 100svh;
+      }
+
+      /* Hero ocupa el 55% izquierdo */
+      .hero {
+        flex: 0 0 55%;
+        min-height: 100svh;
+        justify-content: center;
+        align-items: center;
+        padding: var(--space-lg);
+        background-position: center center;
+
+         /* NUEVO: corte diagonal en el borde derecho */
+        clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+      }
+
+      .hero__content {
+        padding-bottom: var(--space-md);
+      }
+
+      /* Botella: flota en el centro exacto */
+      .bottle-container {
+        position: absolute;
+        left: 37%;
+        top: 0%;
+        bottom: -8%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .bottle-container img {
+        width: clamp(230px, 20vw, 230px);
+        filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+        transform: rotate(12deg);
+        /* La botella pivota desde su base, no desde el centro */
+        transform-origin: bottom center;
+      }
+
+      /* Content ocupa el 45% restante */
+     .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-lg);
+        gap: var(--space-md);
+      }
+
+      /* Botón alineado a la derecha */
+      .btn-cta {
+        align-self: flex-end;
+        align-self: center;
+      }
+      /* Mostrar segunda línea en desktop */
+      .content__divider:last-of-type {
+        display: block;
+      }
+
+    }
+  </style>
+
+</head>
+</head>
+<body>
+
+  <main>
+
+    <div class="page-wrapper">
+
+      <!-- SECCIÓN IZQUIERDA: foto del viñedo -->
+      <section class="hero">
+        <div class="hero__content">
+          <h1 class="hero__logo">Ébano</h1>
+          <p class="hero__tagline">Somos Ribera. Somos Duero.</p>
+        </div>
+      </section>
+
+      <!-- BOTELLA: flota entre las dos secciones -->
+      <figure class="bottle-container">
+        <img
+          src="ebano.png"
+          alt="Botella de vino tinto Ébano, Ribera del Duero"
+        >
+      </figure>
+
+      <!-- SECCIÓN DERECHA: texto y botón -->
+      <section class="content">
+        <div class="content__divider"></div>
+        <p class="content__text">
+          Firmado por una de las bodegas con más futuro de la Ribera del
+          Duero, este tinto refleja todo el carácter del tempranillo
+          ribereño, y además nace avalado por una
+          <strong>Añada Excelente</strong>.
+        </p>
+        <div class="content__divider"></div>
+        <a href="#" class="btn-cta">
+          Descúbrelo
+          <span aria-hidden="true">›</span>
+        </a>
+      </section>
+
+    </div>
+
+  </main>
+</body>
+</html>
